@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+  --primary: #FFC72C; /* McDonald's yellow */
+  --primary-light: #FFD45C;
+  --primary-dark: #FFBA00;
+  --secondary: #000000; /* Pure black */
+  --accent: #D92B2B; /* McDonald's red as accent */
+  --muted: #f5f5f5;
+  --muted-foreground: #525252;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #FFC72C;
+  --radius: 0.5rem;
+  
+  /* Button specific variables */
+  --button-bg: #FFC72C;
+  --button-text: #000000;
+  --button-hover: #FFBA00;
+  
+  /* Heading specific variables */
+  --heading-color: #000000;
+  --subheading-color: #333333;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #121212;
+    --foreground: #F5F5F5;
+    --primary: #FFC72C; /* Same yellow in dark mode */
+    --primary-light: #FFD45C;
+    --primary-dark: #FFBA00;
+    --secondary: #000000;
+    --accent: #D92B2B;
+    --muted: #2A2A2A;
+    --muted-foreground: #A0A0A0;
+    --card: #1F1F1F;
+    --card-foreground: #F5F5F5;
+    --border: #383838;
+    --input: #383838;
+    --ring: #FFC72C;
+    
+    /* Button specific variables */
+    --button-bg: #FFC72C;
+    --button-text: #000000; /* Still black text on yellow in dark mode */
+    --button-hover: #FFBA00;
+    
+    /* Heading specific variables */
+    --heading-color: #FFC72C; /* Yellow headings in dark mode */
+    --subheading-color: #E0E0E0;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Add custom button styles */
+.btn-primary {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--radius);
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--button-hover);
+}
+
+/* Add custom heading styles */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
+  font-weight: 700;
+}
+
+/* Special styles for homepage, tutor and teaching sections */
+.homepage-hero, .tutor-section, .teaching-section {
+  background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.homepage-hero h2, .tutor-section h2, .teaching-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.section-highlight {
+  background-color: var(--primary);
+  color: var(--secondary);
+  padding: 1rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+
+/* Custom styles for dark mode */
+@media (prefers-color-scheme: dark) {
+  .homepage-hero, .tutor-section, .teaching-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #121212 100%);
+  }
+}
+
+/* Enhanced Markdown Styles */
+.markdown-content {
+  @apply text-sm leading-normal;
+}
+
+.markdown-content strong {
+  @apply font-semibold;
+}
+
+.markdown-content a {
+  @apply text-blue-600 dark:text-blue-400 hover:underline transition-colors duration-200;
+}
+
+.markdown-content ul {
+  @apply list-disc pl-4 my-2 space-y-0.5;
+}
+
+.markdown-content ol {
+  @apply list-decimal pl-4 my-2 space-y-0.5;
+}
+
+.markdown-content li {
+  @apply mb-0.5;
+}
+
+.markdown-content h1 {
+  @apply text-xl font-bold mt-3 mb-2 text-slate-900 dark:text-white;
+}
+
+.markdown-content h2 {
+  @apply text-lg font-bold mt-3 mb-2 text-slate-900 dark:text-white border-b border-slate-200 dark:border-zinc-700 pb-1;
+}
+
+.markdown-content h3 {
+  @apply text-base font-bold mt-3 mb-1 text-slate-900 dark:text-white;
+}
+
+.markdown-content h4 {
+  @apply text-sm font-bold mt-2 mb-1 text-slate-900 dark:text-white;
+}
+
+.markdown-content h5 {
+  @apply text-sm font-bold mt-2 mb-1 text-slate-900 dark:text-white;
+}
+
+.markdown-content blockquote {
+  @apply border-l-2 border-slate-300 dark:border-zinc-600 pl-2 py-0.5 my-2 text-slate-700 dark:text-zinc-300 bg-slate-50/50 dark:bg-zinc-800/30 rounded-r-md pr-2;
+}
+
+.markdown-content code {
+  @apply font-mono bg-slate-100 dark:bg-zinc-800 px-1 py-0.5 rounded text-sm;
+}
+
+.markdown-content pre {
+  @apply my-2 p-2 rounded-md overflow-x-auto border border-slate-200 dark:border-zinc-700;
+}
+
+.markdown-content pre code {
+  @apply bg-transparent p-0 block;
+}
+
+.markdown-content hr {
+  @apply my-3 border-t border-slate-200 dark:border-zinc-700;
+}

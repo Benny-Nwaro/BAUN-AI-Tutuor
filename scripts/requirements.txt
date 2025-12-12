@@ -1,0 +1,6 @@
+flask
+flask-cors
+werkzeug
+llama-cpp-python
+requests
+tqdm
